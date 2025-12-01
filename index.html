@@ -1,722 +1,575 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>JSON 解析与层级筛选 Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #22c55e;
+      --accent-2: #60a5fa;
+      --border: #374151;
+      --warn: #f59e0b;
+      --error: #ef4444;
+      --code-bg: #0b1220;
+      --code-border: #1f2937;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 800px at 20% -10%, rgba(96,165,250,0.15), transparent) no-repeat,
+                  radial-gradient(1000px 600px at 120% 30%, rgba(34,197,94,0.12), transparent) no-repeat,
+                  var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    header {
+      padding: 20px clamp(16px, 3vw, 28px);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      background: linear-gradient(180deg, rgba(17,24,39,0.85), rgba(17,24,39,0.55) 60%, transparent);
+      z-index: 10;
+    }
+    h1 {
+      margin: 0 0 6px;
+      font-size: clamp(18px, 2.6vw, 24px);
+      letter-spacing: 0.2px;
+    }
+    .sub {
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .container {
+      padding: 16px clamp(16px, 3vw, 28px) 40px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @media (min-width: 1080px) {
+      .container {
+        grid-template-columns: 420px 1fr;
+        align-items: start;
+      }
+    }
+    .panel {
+      background: linear-gradient(180deg, rgba(17,24,39,0.8), rgba(17,24,39,0.6));
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: clip;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.03);
+    }
+    .panel h2 {
+      margin: 0;
+      padding: 14px 16px;
+      font-size: 15px;
+      letter-spacing: .2px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent);
+    }
+    .panel-body {
+      padding: 14px 16px;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(34,197,94,0.18), rgba(34,197,94,0.12));
+      color: #d1fae5;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.15s ease;
+      user-select: none;
+    }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(34,197,94,0.15); }
+    .btn:active { transform: translateY(0); }
+    .btn.secondary {
+      background: linear-gradient(180deg, rgba(96,165,250,0.18), rgba(96,165,250,0.12));
+      color: #dbeafe;
+    }
+    .btn.warn {
+      background: linear-gradient(180deg, rgba(245,158,11,0.18), rgba(245,158,11,0.12));
+      color: #fef3c7;
+    }
+    .btn.ghost {
+      background: transparent;
+      color: var(--text);
+    }
+    .path {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      background: linear-gradient(180deg, rgba(15,23,42,0.9), rgba(15,23,42,0.7));
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 10px;
+      color: #c7d2fe;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      flex: 1;
+    }
+    .muted { color: var(--muted); }
+    pre {
+      margin: 0;
+      padding: 14px;
+      background: var(--code-bg);
+      border-top: 1px solid var(--code-border);
+      border-radius: 0 0 14px 14px;
+      overflow: auto;
+      max-height: 70vh;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    code { color: #e2e8f0; }
+    .k { color: #93c5fd; }
+    .str { color: #86efac; }
+    .num { color: #fca5a5; }
+    .bool { color: #fcd34d; }
+    .null { color: #a5b4fc; font-style: italic; }
+    .type-hint {
+      font-size: 12px;
+      color: var(--muted);
+      margin-left: 6px;
+    }
+    .hint {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+    .select-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+    select {
+      background: #0b1220;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 10px;
+      border-radius: 10px;
+      min-width: 220px;
+      font-size: 14px;
+    }
+    .footer {
+      padding: 12px 16px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .copy {
+      cursor: pointer;
+      color: #a7f3d0;
+      text-decoration: underline dotted;
+    }
+    .input-area textarea {
+      width: 100%;
+      min-height: 140px;
+      background: #0b1220;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text);
+      padding: 10px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      resize: vertical;
+    }
+    .tag {
+      padding: 2px 6px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      font-size: 11px;
+      color: var(--muted);
+    }
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+  <header>
+    <h1>JSON 解析与层级筛选 Demo</h1>
+    <div class="sub">点击“+ 筛选”选择当前节点的键/索引，逐级深入查看对应 value。</div>
+  </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
+  <div class="container">
+    <!-- 左侧：控制与输入 -->
+    <section class="panel">
+      <h2>控制区</h2>
+      <div class="panel-body">
+        <div class="controls">
+          <button id="btnAdd" class="btn" title="深入一层"><span>➕</span> + 筛选</button>
+          <button id="btnBack" class="btn secondary" title="返回上一步">↩ 返回</button>
+          <button id="btnRoot" class="btn warn" title="回到根">⟲ 回到根</button>
         </div>
+
+        <div class="select-row">
+          <div class="tag">当前路径</div>
+          <div id="pathView" class="path" title="点击复制路径"></div>
+          <button id="copyPath" class="btn ghost" title="复制路径">📋 复制</button>
+        </div>
+
+        <div class="input-area">
+          <div class="select-row" style="margin-top:6px;">
+            <div class="tag">数据源</div>
+            <span class="type-hint">可编辑，点击“应用数据”重新载入</span>
+          </div>
+          <textarea id="jsonInput"></textarea>
+          <div class="controls" style="margin-top:8px;">
+            <button id="btnApply" class="btn secondary">✅ 应用数据</button>
+            <span id="status" class="hint"></span>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        支持对象与数组筛选；叶子节点无法继续筛选将提示。路径格式示例：root.users[2].profile.name
+      </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
-        </div>
+    <!-- 右侧：展示 -->
+    <section class="panel">
+      <h2>当前展示 <span id="typeHint" class="type-hint"></span></h2>
+      <pre><code id="viewer"></code></pre>
     </section>
+  </div>
 
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
-            </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
-
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
-            
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
+  <script>
+    // 测试 JSON：结构复杂但每个 value 不大
+    const TEST_DATA = {
+      meta: {
+        version: "1.4.2",
+        generatedAt: "2025-10-30T08:12:00Z",
+        tags: ["demo", "json", "filter"],
+        flags: { archived: false, experimental: true },
+      },
+      stats: {
+        users: 1287,
+        active: 958,
+        regions: ["NA", "EU", "APAC"],
+        loadAvg: [0.42, 0.58, 0.36],
+      },
+      users: [
+        {
+          id: "u_0001",
+          profile: { name: "Alice", age: 29, roles: ["admin", "dev"] },
+          preferences: { theme: "dark", lang: "en", shortcuts: { save: "Ctrl+S", run: "Ctrl+R" } },
+          lastLogin: { time: "2025-10-29T12:00:00Z", ip: "10.0.0.1" },
+        },
+        {
+          id: "u_0002",
+          profile: { name: "Bob", age: 34, roles: ["editor"] },
+          preferences: { theme: "light", lang: "zh-CN", notifications: { email: true, sms: false } },
+          lastLogin: { time: "2025-10-29T18:33:10Z", ip: "10.0.0.2" },
+        },
+        {
+          id: "u_0003",
+          profile: { name: "Carol", age: 25, roles: ["viewer"], contacts: [{ type: "email", value: "c@example.com" }] },
+          preferences: { theme: "dark", lang: "ja", layout: { density: "compact", sidebar: true } },
+          lastLogin: { time: "2025-10-28T06:01:44Z", ip: "10.0.0.3" },
         }
+      ],
+      settings: {
+        features: { payments: true, realtime: true, audit: false },
+        limits: { maxProjects: 20, maxMembers: 100 },
+        themes: [
+          { id: "t1", name: "Ocean", colors: { primary: "#1e3a8a", accent: "#22d3ee" } },
+          { id: "t2", name: "Forest", colors: { primary: "#065f46", accent: "#84cc16" } },
+        ],
+      },
+      content: {
+        pages: [
+          { id: "p_home", title: "Home", blocks: [{ type: "hero" }, { type: "grid" }] },
+          { id: "p_about", title: "About", blocks: [{ type: "md", src: "about.md" }] }
+        ],
+        media: {
+          images: [{ id: "img_1", w: 1200, h: 630 }, { id: "img_2", w: 800, h: 600 }],
+          videos: [{ id: "vid_1", dur: 12 }, { id: "vid_2", dur: 35 }],
+        }
+      },
+      pipelines: [
+        { id: "pl_ingest", steps: [{ op: "fetch" }, { op: "normalize" }, { op: "store" }] },
+        { id: "pl_export", steps: [{ op: "select" }, { op: "render" }, { op: "upload" }] }
+      ],
+      map: {
+        nodes: {
+          n1: { label: "Start", links: ["n2", "n3"] },
+          n2: { label: "Process", links: ["n4"] },
+          n3: { label: "Alt", links: [] },
+          n4: { label: "End", links: [] }
+        }
+      }
+    };
 
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
+    // 状态
+    let rootData = TEST_DATA;
+    let stack = []; // 每步: { key, value, type }
+    const viewer = document.getElementById('viewer');
+    const typeHint = document.getElementById('typeHint');
+    const pathView = document.getElementById('pathView');
+    const btnAdd = document.getElementById('btnAdd');
+    const btnBack = document.getElementById('btnBack');
+    const btnRoot = document.getElementById('btnRoot');
+    const btnApply = document.getElementById('btnApply');
+    const status = document.getElementById('status');
+    const copyPath = document.getElementById('copyPath');
+    const jsonInput = document.getElementById('jsonInput');
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
+    // 初始化输入框
+    jsonInput.value = JSON.stringify(TEST_DATA, null, 2);
+
+    // 工具函数
+    const isObject = v => Object.prototype.toString.call(v) === '[object Object]';
+    const isArray = Array.isArray;
+    const getType = v => v === null ? 'null' : isArray(v) ? 'array' : typeof v;
+    const atCurrent = () => stack.length ? stack[stack.length-1].value : rootData;
+
+    function currentPathString() {
+      if (!stack.length) return 'root';
+      let parts = ['root'];
+      for (const seg of stack) {
+        if (typeof seg.key === 'number') {
+          parts[parts.length-1] += `[${seg.key}]`;
+        } else if (/^[A-Za-z_$][A-Za-z0-9_$]*$/.test(seg.key)) {
+          parts.push(seg.key);
+        } else {
+          parts.push(`["${String(seg.key).replace(/"/g, '\\"')}"]`);
+        }
+      }
+      return parts.join('.');
+    }
+
+    function syntaxHighlight(jsonString) {
+      // 简易高亮
+      return jsonString
+        .replace(/(&|<|>)/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]))
+        .replace(/"([^"\\]|\\.)*"\s*:/g, m => `<span class="k">${m}</span>`)
+        .replace(/"(?:[^"\\]|\\.)*"/g, m => `<span class="str">${m}</span>`)
+        .replace(/\b(true|false)\b/g, m => `<span class="bool">${m}</span>`)
+        .replace(/\b(null)\b/g, m => `<span class="null">${m}</span>`)
+        .replace(/\b-?\d+(\.\d+)?([eE][+-]?\d+)?\b/g, m => `<span class="num">${m}</span>`);
+    }
+
+    function render() {
+      const data = atCurrent();
+      const type = getType(data);
+      typeHint.textContent = `类型：${type}`;
+      pathView.textContent = currentPathString();
+
+      try {
+        const pretty = JSON.stringify(data, (key, value) => value, 2);
+        viewer.innerHTML = syntaxHighlight(pretty);
+        status.textContent = '';
+      } catch (e) {
+        viewer.textContent = '渲染失败：' + e.message;
+      }
+      
+      // 控制按钮状态
+      const canDrill = isObject(data) || isArray(data);
+      btnAdd.disabled = !canDrill;
+      btnBack.disabled = stack.length === 0;
+      btnRoot.disabled = stack.length === 0;
+      
+      // 更新按钮样式提示
+      btnAdd.title = canDrill ? '深入一层（选择键/索引）' : '当前是叶子节点，无法继续筛选';
+    }
+    
+    function promptSelectKey(container) {
+      // 创建一个轻量的浮层选择器
+      const overlay = document.createElement('div');
+      overlay.style.position = 'fixed';
+      overlay.style.inset = '0';
+      overlay.style.background = 'rgba(0,0,0,0.35)';
+      overlay.style.backdropFilter = 'blur(2px)';
+      overlay.style.display = 'flex';
+      overlay.style.alignItems = 'center';
+      overlay.style.justifyContent = 'center';
+      overlay.style.zIndex = '9999';
+      
+      const panel = document.createElement('div');
+      panel.style.background = '#0b1220';
+      panel.style.border = '1px solid #374151';
+      panel.style.borderRadius = '12px';
+      panel.style.minWidth = '320px';
+      panel.style.maxWidth = '90vw';
+      panel.style.boxShadow = '0 20px 60px rgba(0,0,0,0.4)';
+      panel.style.padding = '14px';
+      
+      const title = document.createElement('div');
+      title.style.fontSize = '14px';
+      title.style.marginBottom = '8px';
+      const isArr = isArray(container);
+      title.textContent = isArr ? '选择一个数组索引' : '选择一个对象键';
+      
+      const select = document.createElement('select');
+      select.style.width = '100%';
+      
+      const keys = isArr ? container.map((_, i) => i) : Object.keys(container);
+      
+      if (keys.length === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'hint';
+        empty.textContent = '当前没有可选项。';
+        panel.appendChild(title);
+        panel.appendChild(empty);
+      } else {
+        // 选项渲染：显示键与类型提示
+        const frag = document.createDocumentFragment();
+        keys.forEach(k => {
+          const v = container[k];
+          const opt = document.createElement('option');
+          const t = getType(v);
+          opt.value = String(k);
+          opt.textContent = isArr ? `[${k}] : ${t}` : `${k} : ${t}`;
+          frag.appendChild(opt);
         });
-    </script>
+        select.appendChild(frag);
+        panel.appendChild(title);
+        panel.appendChild(select);
+      }
+      
+      const row = document.createElement('div');
+      row.style.display = 'flex';
+      row.style.gap = '8px';
+      row.style.marginTop = '10px';
+      const ok = document.createElement('button');
+      ok.className = 'btn secondary';
+      ok.textContent = '确定';
+      const cancel = document.createElement('button');
+      cancel.className = 'btn ghost';
+      cancel.textContent = '取消';
+      row.appendChild(ok);
+      row.appendChild(cancel);
+      panel.appendChild(row);
+      
+      overlay.appendChild(panel);
+      document.body.appendChild(overlay);
+      
+      return new Promise((resolve) => {
+        const cleanup = () => overlay.remove();
+        cancel.onclick = () => {
+          cleanup();
+          resolve(null);
+        };
+        ok.onclick = () => {
+          if (!select.options.length) {
+            cleanup();
+            resolve(null);
+            return;
+          }
+          let key = select.value;
+          if (isArr) key = Number(key);
+          cleanup();
+          resolve(key);
+        };
+        overlay.addEventListener('click', (e) => {
+          if (e.target === overlay) {
+            cleanup();
+            resolve(null);
+          }
+        });
+        // 键盘快捷
+        overlay.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            cleanup();
+            resolve(null);
+          } else if (e.key === 'Enter') {
+            ok.click();
+          }
+        });
+        // 聚焦
+        setTimeout(() => select.focus(), 0);
+      });
+    }
+    
+    async function onAdd() {
+      const cur = atCurrent();
+      if (!(isObject(cur) || isArray(cur))) {
+        status.textContent = '提示：当前是叶子节点，无法继续筛选。';
+        return;
+      }
+      const key = await promptSelectKey(cur);
+      if (key === null || key === undefined) return;
+      const value = cur[key];
+      stack.push({ key, value, type: getType(value) });
+      render();
+    }
+    
+    function onBack() {
+      if (!stack.length) return;
+      stack.pop();
+      render();
+    }
+    
+    function onRoot() {
+      stack = [];
+      render();
+    }
+    
+    function applyData() {
+      const text = jsonInput.value.trim();
+      if (!text) {
+        status.textContent = '请输入 JSON 数据。';
+        return;
+      }
+      try {
+        const data = JSON.parse(text);
+        rootData = data;
+        stack = [];
+        status.textContent = '已应用新的数据源。';
+        render();
+      } catch (e) {
+        status.textContent = 'JSON 解析失败：' + e.message;
+      }
+    }
+    
+    // 复制路径
+    async function copyCurrentPath() {
+      const p = currentPathString();
+      try {
+        await navigator.clipboard.writeText(p);
+        status.textContent = '已复制路径：' + p;
+      } catch {
+        // 回退方案
+        const ta = document.createElement('textarea');
+        ta.value = p;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+        status.textContent = '已复制路径（兼容模式）：' + p;
+      }
+    }
+    
+    // 点击路径区域也复制
+    pathView.addEventListener('click', copyCurrentPath);
+    copyPath.addEventListener('click', copyCurrentPath);
+    
+    // 事件绑定
+    btnAdd.addEventListener('click', onAdd);
+    btnBack.addEventListener('click', onBack);
+    btnRoot.addEventListener('click', onRoot);
+    btnApply.addEventListener('click', applyData);
+    
+    // 初次渲染
+    render();
+  </script>
 </body>
-
 </html>
